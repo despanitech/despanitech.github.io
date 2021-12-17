@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Apollo Client | Mobile Hub</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="DespaniTech Mobile team documentation">
+    
+    <link rel="preload" href="/assets/css/0.styles.703fa9bf.css" as="style"><link rel="preload" href="/assets/js/app.ba5dc5a2.js" as="script"><link rel="preload" href="/assets/js/2.a9abcdba.js" as="script"><link rel="preload" href="/assets/js/8.618f1b66.js" as="script"><link rel="prefetch" href="/assets/js/10.3110fb8f.js"><link rel="prefetch" href="/assets/js/11.b04f4c2a.js"><link rel="prefetch" href="/assets/js/12.79bdf7b5.js"><link rel="prefetch" href="/assets/js/13.0fdf885a.js"><link rel="prefetch" href="/assets/js/14.a3ddcf96.js"><link rel="prefetch" href="/assets/js/15.33ac623c.js"><link rel="prefetch" href="/assets/js/3.b7fd191b.js"><link rel="prefetch" href="/assets/js/4.68304ba4.js"><link rel="prefetch" href="/assets/js/5.a1748bb1.js"><link rel="prefetch" href="/assets/js/6.41f85f5f.js"><link rel="prefetch" href="/assets/js/7.3a2454d7.js"><link rel="prefetch" href="/assets/js/9.01b4a754.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.703fa9bf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Mobile Hub</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>XCode standards</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/pages/code-standard/getting-started.html" class="sidebar-link">Getting started</a></li><li><a href="/pages/code-standard/file-structure.html" class="sidebar-link">File Structure</a></li><li><a href="/pages/code-standard/import-and-export.html" class="sidebar-link">Imports and exports</a></li><li><a href="/pages/code-standard/components.html" class="sidebar-link">Components</a></li><li><a href="/pages/code-standard/dumb-components.html" class="sidebar-link">Dumb components</a></li><li><a href="/pages/code-standard/smart-components.html" class="sidebar-link">Smart components</a></li><li><a href="/pages/code-standard/styles.html" class="sidebar-link">Styles</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="apollo-client"><a href="#apollo-client" class="header-anchor">#</a> Apollo Client</h1> <ul><li>Each query will live inside of the folder gql/queries</li> <li>Each mutation will live inside of the folder gql/mutations</li> <li>When we're doing the query or mutation declaration, name should be uppercase, as follows:</li></ul> <div class="language-js extra-class"><pre class="language-js"><code>    <span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">GET_USER_INFORMATION</span> <span class="token operator">=</span> gql<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+    query {
+        me {
+        accessToken
+        id
+        firstName
+        lastName
+        phoneNumber
+        contactEmail
+        profilePhoto {
+            id
+            url
+        }
+        agent {
+            completedStages {
+            totalStages
+            incompleteStages
+            completeStages
+            }
+        }
+        vendor {
+            id
+            email
+            businessName
+        }
+        }
+    }
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+</code></pre></div><h1 id="naming-of-querys-or-mutations-when-we-call-them-in-our-functional-component"><a href="#naming-of-querys-or-mutations-when-we-call-them-in-our-functional-component" class="header-anchor">#</a> Naming of querys or mutations when we call them in our functional component:</h1> <ul><li>The destructuring of properties, should follow the pattern of for example &quot;data: invitationsData&quot;, &quot;loading: loadingInvitationsData&quot;, &quot;error: errorInvitationsData&quot;</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//bad</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>data<span class="token punctuation">,</span> loading<span class="token punctuation">,</span> error<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useQuery</span><span class="token punctuation">(</span><span class="token constant">GET_USER</span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//good</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>data<span class="token operator">:</span> userData<span class="token punctuation">,</span> loading<span class="token operator">:</span> loadingUserData<span class="token punctuation">,</span> error<span class="token operator">:</span> errorUserData<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useQuery</span><span class="token punctuation">(</span><span class="token constant">GET_USER</span><span class="token punctuation">)</span>
+</code></pre></div><p>If it's a lazy query we can do something like:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> <span class="token punctuation">[</span>fetchUserData<span class="token punctuation">,</span> <span class="token punctuation">{</span>data<span class="token operator">:</span> userData<span class="token punctuation">,</span> loading<span class="token operator">:</span> loadingUserData<span class="token punctuation">,</span> error<span class="token operator">:</span> errorUserData<span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useLazyQuery</span><span class="token punctuation">(</span><span class="token constant">GET_USER</span><span class="token punctuation">)</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.ba5dc5a2.js" defer></script><script src="/assets/js/2.a9abcdba.js" defer></script><script src="/assets/js/8.618f1b66.js" defer></script>
+  </body>
+</html>
